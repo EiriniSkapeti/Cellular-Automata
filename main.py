@@ -19,12 +19,12 @@ screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 pygame.display.set_caption("Cellular Automata")
 clock = pygame.time.Clock()
 
-# Create a random grid
-def random_grid():
-    return [[random.choice([0, 1]) for _ in range(GRID_WIDTH)] for _ in range(GRID_HEIGHT)]
+# Create first grid
+def display_grid():
+    return [grid]
      
+grid = [[0 for _ in range(GRID_WIDTH)] for _ in range(GRID_HEIGHT)]
 
-grid = random_grid()
 
 # Main loop
 running = True
