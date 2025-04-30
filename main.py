@@ -39,7 +39,7 @@ def count_neighbors(grid, x, y):
     return neighbors 
        
 def update_grid(grid):
-    new_grid = [[0 for _ in range(GRID_WIDTH)] for _ in range(GRID_HEIGHT)]
+    new_grid= [[0 for _ in range(GRID_WIDTH)] for _ in range(GRID_HEIGHT)]
     for y in range(GRID_HEIGHT):
         for x in range(GRID_WIDTH):
             neighbors = count_neighbors(grid, x, y)
@@ -47,21 +47,28 @@ def update_grid(grid):
                 if neighbors == 2 or neighbors == 3:
                     new_grid[y][x] = 1 #survives
                 else:
-                    if neighbors == 3:
-                        new_grid[y][x] = 1 #new life
-    return new_grid()
-
+                        new_grid[y][x] = 0 #dies
+            else:
+                if neighbors == 3:
+                    new_grid[y][x] = 1
+    return new_grid
 
 
 # Main loop
-running = True
+
 simulate = False
+running = True
+
 while running:
     screen.fill(WHITE)  # Clear the screen every frame
    
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_SPACE:
+                simulate = not simulate
         
         if pygame.mouse.get_pressed()[0]:
             mouse_x, mouse_y = pygame.mouse.get_pos()
@@ -70,9 +77,7 @@ while running:
             if 0 <= grid_x < GRID_WIDTH and 0 <= grid_y < GRID_HEIGHT:
                 grid[grid_y][grid_x] = 1
 
-    if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_SPACE:
-                simulate = not simulate
+
 
     if simulate:
         grid = update_grid(grid)
