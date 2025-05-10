@@ -25,34 +25,7 @@ def display_grid():
      
 grid = [[0 for _ in range(GRID_WIDTH)] for _ in range(GRID_HEIGHT)]
 
-
-def count_neighbors(grid, x, y):
-    neighbors = 0
-    for dy in [-1, 0, 1]:
-        for dx in[-1, 0, 1]:
-           nx, ny = x + dx, y + dy
-           if dx == 0 and dy == 0:
-               continue
-           if 0<= nx < GRID_WIDTH and 0<= ny < GRID_HEIGHT:
-               neighbors += grid[ny][nx]
-               
-    return neighbors 
-       
-def update_grid(grid):
-    new_grid= [[0 for _ in range(GRID_WIDTH)] for _ in range(GRID_HEIGHT)]
-    for y in range(GRID_HEIGHT):
-        for x in range(GRID_WIDTH):
-            neighbors = count_neighbors(grid, x, y)
-            if grid[y][x] == 1 :
-                if neighbors == 2 or neighbors == 3:
-                    new_grid[y][x] = 1 #survives
-                else:
-                        new_grid[y][x] = 0 #dies
-            else:
-                if neighbors == 3:
-                    new_grid[y][x] = 1
-    return new_grid
-
+from rules.conway import update_grid
 
 # Main loop
 
@@ -77,10 +50,10 @@ while running:
             if 0 <= grid_x < GRID_WIDTH and 0 <= grid_y < GRID_HEIGHT:
                 grid[grid_y][grid_x] = 1
 
-
+     
 
     if simulate:
-        grid = update_grid(grid)
+        grid = update_grid(grid, GRID_WIDTH, GRID_HEIGHT)
 
     # Draw the grid each frame
     for y in range(GRID_HEIGHT):
