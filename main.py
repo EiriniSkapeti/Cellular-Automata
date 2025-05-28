@@ -25,7 +25,8 @@ def display_grid():
      
 grid = [[0 for _ in range(GRID_WIDTH)] for _ in range(GRID_HEIGHT)]
 
-from rules.conway import update_grid
+#from rules.conway import update_grid
+from rules.rule30 import update_grid 
 
 # Main loop
 
