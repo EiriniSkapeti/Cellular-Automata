@@ -5,9 +5,9 @@ import pygame
 pygame.init()
 
 # Constants
-CELL_SIZE = 20
-GRID_WIDTH = 40
-GRID_HEIGHT = 40
+CELL_SIZE = 10
+GRID_WIDTH = 100
+GRID_HEIGHT = 60
 WINDOW_WIDTH = CELL_SIZE * GRID_WIDTH
 WINDOW_HEIGHT = CELL_SIZE * GRID_HEIGHT
 WHITE = (255, 255, 255)
@@ -40,16 +40,15 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
-        if event.type == pygame.KEYDOWN:
+        if event.type == pygame.K_SPACE:
             if event.key == pygame.K_SPACE:
                 simulate = not simulate
-        
-        if pygame.mouse.get_pressed()[0]:
-            mouse_x, mouse_y = pygame.mouse.get_pos()
-            grid_x = mouse_x // CELL_SIZE
-            grid_y = mouse_y // CELL_SIZE
-            if 0 <= grid_x < GRID_WIDTH and 0 <= grid_y < GRID_HEIGHT:
-                grid[grid_y][grid_x] = 1
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_SPACE:
+                simulate = True
+
+                mid_x = GRID_WIDTH // 2
+                grid[0][mid_x]= 1 
 
      
 
