@@ -1,13 +1,13 @@
 import pygame
-#import random
+import random
 
 # Initialize
 pygame.init()
 
 # Constants
 CELL_SIZE = 10
-GRID_WIDTH = 100
-GRID_HEIGHT = 60
+GRID_WIDTH = 150
+GRID_HEIGHT = 70
 WINDOW_WIDTH = CELL_SIZE * GRID_WIDTH
 WINDOW_HEIGHT = CELL_SIZE * GRID_HEIGHT
 WHITE = (255, 255, 255)
@@ -26,7 +26,19 @@ def display_grid():
 grid = [[0 for _ in range(GRID_WIDTH)] for _ in range(GRID_HEIGHT)]
 
 #from rules.conway import update_grid
-from rules.rule30 import update_grid 
+from rules.rule30 import update_grid as rule30
+from rules.rule90 import update_grid as rule90
+from rules.rule182 import update_grid as rule182 
+from rules.rule126 import update_grid as rule126
+from rules.rule150 import update_grid as rule150
+
+rule_set = {
+    "Rule 30": rule30,
+    "Rule 90": rule90,
+    "Rule 182": rule182,
+    "Rule 126": rule126,
+    "Rule 150": rule150,
+}
 
 # Main loop
 
@@ -50,7 +62,8 @@ while running:
                 mid_x = GRID_WIDTH // 2
                 grid[0][mid_x]= 1 
 
-     
+            selected_name, update_grid = random.choice(list(rule_set.items()))
+            print(f"Using {selected_name}")
 
     if simulate:
         grid = update_grid(grid, GRID_WIDTH, GRID_HEIGHT)
